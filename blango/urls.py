@@ -40,7 +40,7 @@ urlpatterns = [
     ),
     path("accounts/", include("django_registration.backends.activation.urls")),
     path("ip/", blog.views.get_ip),
-    path("api/v1/", include("blog.api_urls")),
+    path("api/v1/", include("blog.api.urls")),
 ]
 
 if settings.DEBUG:
