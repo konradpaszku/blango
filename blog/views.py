@@ -1,7 +1,7 @@
 import logging
 from django.shortcuts import render, get_object_or_404,redirect
 from blog.forms import CommentForm
-
+from blog.api.permissions import AuthorModifyOrReadOnly
 from django.utils import timezone
 from blog.models import Post
 
@@ -20,6 +20,7 @@ def index(request):
 
 
 def post_detail(request, slug):
+    permission_classes = [AuthorModifyOrReadOnly | IsAdminUserForObject]
     post = get_object_or_404(Post, slug=slug)
     if request.user.is_active:
         if request.method == "POST":
