@@ -44,6 +44,7 @@ class Dev(Configuration):
   SESSION_COOKIE_SAMESITE = 'None'
   CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
   CRISPY_TEMPLATE_PACK = "bootstrap5"
+  
 
 
 
@@ -68,6 +69,7 @@ class Dev(Configuration):
       'allauth.socialaccount.providers.google',
       'rest_framework',
       'rest_framework.authtoken',
+      'drf_yasg'
   ]
 
   MIDDLEWARE = [
@@ -225,6 +227,12 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticatedOrReadOnly"
     ],
 }
+SWAGGER_SETTINGS = {
+        "SECURITY_DEFINITIONS": {
+            "Token": {"type": "apiKey", "name": "Authorization", "in": "header"},
+            "Basic": {"type": "basic"},
+        }
+    }
 
 class Prod(Dev):
     DEBUG = False
