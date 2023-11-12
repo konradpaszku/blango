@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 from configurations import Configuration
 from configurations import values
+from datetime import timedelta
 
 
 
@@ -44,7 +45,10 @@ class Dev(Configuration):
   SESSION_COOKIE_SAMESITE = 'None'
   CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
   CRISPY_TEMPLATE_PACK = "bootstrap5"
-  
+  SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    }
 
 
 
@@ -69,7 +73,8 @@ class Dev(Configuration):
       'allauth.socialaccount.providers.google',
       'rest_framework',
       'rest_framework.authtoken',
-      'drf_yasg'
+      'drf_yasg',
+      'django_filters',
   ]
 
   MIDDLEWARE = [
@@ -222,6 +227,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication"
     ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticatedOrReadOnly"
