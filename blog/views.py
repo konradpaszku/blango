@@ -1,7 +1,7 @@
 import logging
 from django.shortcuts import render, get_object_or_404,redirect
 from blog.forms import CommentForm
-from blog.api.permissions import AuthorModifyOrReadOnly
+from blog.api.permissions import AuthorModifyOrReadOnly, IsAdminUserForObject
 from django.utils import timezone
 from blog.models import Post
 
